@@ -1,4 +1,3 @@
-
 public class ContactProject9 {
 	
 	public String name;
@@ -7,6 +6,7 @@ public class ContactProject9 {
 	
 	
 	public ContactProject9(String name, String email, String phoneNumber) throws InvalidPhoneNumberException, InvalidEmailException {
+		
 		this.name = name;
 		
 		if (email.contains("@") && email.contains(".")) {

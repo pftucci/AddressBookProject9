@@ -40,12 +40,7 @@ public class AddressBookProject9 {
 	public static void menu() {
 		if (contactsInAddressBook.isEmpty()) {
 			System.out.println("There are no contacts stored.");
-		} else {
-			System.out.println("\nAddress Book: ");
-			for (ContactProject9 c:contactsInAddressBook){
-			System.out.print("\n" + c.getStringToPrint() + "\n");
-			}
-		}
+		}	
 		
 		System.out.println("\nWhat would you like to do? Select an option from the menu.");
 		System.out.println("1) Add a new contact");
@@ -69,10 +64,7 @@ public class AddressBookProject9 {
 
 		try {
 			x = new ContactProject9(contactName, contactEmail, contactPhoneNumber);	
-		} catch (InvalidPhoneNumberException e) {
-			System.out.println(e.getMessage());
-			x = getContactDetails(input);
-		} catch (InvalidEmailException e) {
+		} catch (InvalidPhoneNumberException | InvalidEmailException e) {
 			System.out.println(e.getMessage());
 			x = getContactDetails(input);
 		}
@@ -82,54 +74,61 @@ public class AddressBookProject9 {
 	}	
 	
 	public static void editAContact(Scanner input) {
+		int editOption = 0;
 	
 		System.out.println("Which contact would you like to edit? Enter its index.");
 		int contactToEdit = input.nextInt();
 		
 		ContactProject9 selectedContact = contactsInAddressBook.get(contactToEdit);
-	
-		System.out.println("What would you like to edit about contact?\n");
-		System.out.println("1) Edit Name: " + selectedContact.getName());
-		System.out.println("2) Edit Email: " + selectedContact.getEmail());
-		System.out.println("3) Edit Phone number: " + selectedContact.getPhoneNumber());
-		System.out.println("4) Exit to Main Menu");
-		int editOption = input.nextInt();
-		input.nextLine();
 		
-		switch (editOption) {
-			case 1:
-				selectedContact.getName();
-				System.out.println("Enter new name.");
-				String newName = input.nextLine();
-				selectedContact.setName(newName);
-				break;
-			case 2:
-				selectedContact.getEmail();
-				while (true) {
-					try {
-						System.out.println("Enter new email.");
-						String newEmail = input.nextLine();
-						selectedContact.setEmail(newEmail);
-						break;
-					} catch (InvalidEmailException e) {
-						System.out.println(e.getMessage());
+		do {
+	
+			System.out.println("What would you like to edit about contact?\n");
+			System.out.println("1) Edit Name: " + selectedContact.getName());
+			System.out.println("2) Edit Email: " + selectedContact.getEmail());
+			System.out.println("3) Edit Phone number: " + selectedContact.getPhoneNumber());
+			System.out.println("4) Exit to Main Menu");
+			editOption = input.nextInt();
+			input.nextLine();
+			
+			switch (editOption) {
+				case 1:
+					selectedContact.getName();
+					System.out.println("Enter new name.");
+					String newName = input.nextLine();
+					selectedContact.setName(newName);
+					break;
+				case 2:
+					selectedContact.getEmail();
+					while (true) {
+						try {
+							System.out.println("Enter new email.");
+							String newEmail = input.nextLine();
+							selectedContact.setEmail(newEmail);
+							break;
+						} catch (InvalidEmailException e) {
+							System.out.println(e.getMessage());
+						}
 					}
-				}	
-			case 3:
-				selectedContact.getPhoneNumber();
-				while (true) {
-					try {
-						System.out.println("Enter new phone number.");
-						String newPhoneNumber = input.nextLine();
-						selectedContact.setPhoneNumber(newPhoneNumber);
-						break;
-					} catch (InvalidPhoneNumberException e) {
-						System.out.println(e.getMessage());
+					break;
+				case 3:
+					selectedContact.getPhoneNumber();
+					while (true) {
+						try {
+							System.out.println("Enter new phone number.");
+							String newPhoneNumber = input.nextLine();
+							selectedContact.setPhoneNumber(newPhoneNumber);
+							break;
+						} catch (InvalidPhoneNumberException e) {
+							System.out.println(e.getMessage());
+						}
 					}
-				}
-			case 4:
-				break;
-		}
+					break;
+				case 4:
+					break;
+			}
+			
+		} while (editOption != 4);
 	
 	}
 	
