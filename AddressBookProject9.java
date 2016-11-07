@@ -82,7 +82,6 @@ public class AddressBookProject9 {
 		ContactProject9 selectedContact = contactsInAddressBook.get(contactToEdit);
 		
 		do {
-	
 			System.out.println("What would you like to edit about contact?\n");
 			System.out.println("1) Edit Name: " + selectedContact.getName());
 			System.out.println("2) Edit Email: " + selectedContact.getEmail());
@@ -145,7 +144,8 @@ public class AddressBookProject9 {
 		
 		if (deleteConfirmation == 1) {
 			contactsInAddressBook.remove(contactToDelete);
-		}		
+		}	
+		
 	}
 	
 	public static void displayAllContacts() {
